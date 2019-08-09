@@ -1,0 +1,31 @@
+{
+  "name": "npm-git-version-tagger",
+  "version": "1.0.0",
+  "description": "Automatically add git version tags to NPM package repositories.",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsnickbarry/npm-git-version-tagger.git"
+  },
+  "keywords": [
+    "npm",
+    "git",
+    "version",
+    "tagger",
+    "tag",
+    "release",
+    "wow"
+  ],
+  "author": "Nick Barry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itsnickbarry/npm-git-version-tagger/issues"
+  },
+  "homepage": "https://github.com/itsnickbarry/npm-git-version-tagger#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

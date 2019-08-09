@@ -5,8 +5,6 @@ let request = require('request');
 
 const REGISTRY = 'https://registry.npmjs.org/';
 
-let master = 'master';
-
 let package;
 try {
   package = require(`${ process.cwd() }/package.json`).name;
@@ -15,8 +13,6 @@ try {
 }
 
 let url = `${ REGISTRY }${ package }`;
-
-cp.execSync(`git checkout ${ master }`);
 
 request(url, function (error, data) {
   if (error) {
@@ -37,15 +33,16 @@ request(url, function (error, data) {
 
         if (gitHead) {
           console.log(`Adding tag v${ version } to ${ gitHead }.`);
-          cp.execSync(`git checkout ${ gitHead } -q`);
-          cp.execSync(`GIT_COMMITTER_DATE="${ body.time[version] }" git tag -a v${ version } -m"v${ version }"`);
-          count++;
+          try {
+            cp.execSync(`GIT_COMMITTER_DATE="${ body.time[version] }" git tag v${ version } ${ gitHead } -m "tagged by npm-git-version-tagger"`);
+            count++;
+          } catch (e) {
+            // ignore
+          }
         } else {
           console.log(`No gitHead found for version ${ version }; no tags created.`);
         }
       }
-
-      cp.execSync(`git checkout ${ master }`);
 
       console.log(`Added ${ count } git tags.`);
       console.log('Use `git log` to review changes.');

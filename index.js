@@ -10,6 +10,7 @@ try {
   package = require(`${ process.cwd() }/package.json`).name;
 } catch (e) {
   console.log('package.json not found in current working directory');
+  process.exit();
 }
 
 let url = `${ REGISTRY }${ package }`;
